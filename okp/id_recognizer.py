@@ -13,8 +13,7 @@ def is_identifier(w):
     return False
         
 def find_identifiers(line):
-    seps = list(',;.=->*+/()[]%')
-    seps.append(' ')
+    seps = ",;.=->*+/()[]% "
     return smart_split(line, seps, keep_splitters=True)
 
 # we do some touchups to remove something like foo.bar.baz

@@ -7,7 +7,6 @@ import os
 
 ASSERT_SOURCE_MAP = True
 
-
 def pipeline(lines, base_dir=None, add_source_map=True, fname=None):
     lines = comments.skip_comments(lines)
     # all functions modifying tlines can change the line numbers

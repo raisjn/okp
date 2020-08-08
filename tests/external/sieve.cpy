@@ -5,7 +5,7 @@ class Sieve:
     int last_max
 
 public:
-    Sieve():
+    known Sieve():
         // 0 is prime, 1 is prime, 2 is prime, 3 is prime
         // the rest follow from that
         values = { 0, 0, 0, 0 }

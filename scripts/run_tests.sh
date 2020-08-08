@@ -22,6 +22,13 @@ function test_output() {
     ${exe_name} > ${tmp_name} 2> ${tmp_name}.err
   fi
 
+  if [[ $? != 0 ]]; then
+    echo "FAILED: ${1}"
+    cat ${diff_name}
+    FAILED=$(($FAILED+1))
+    return 1
+  fi
+
   if test -f ${out_name}; then
     diff ${out_name} ${tmp_name} > ${diff_name}
     if [[ $? != 0 ]]; then
@@ -116,6 +123,7 @@ function run_project_test() {
   tmp_name="${name}/tmp"
   diff_name="${name}/diff"
 
+  rm ${exe_name} 2>/dev/null
   python3 -m okp.main -for -rof ${cpys} ${hs} ${cpps} -o ${exe_name} 2> ${name}/compile
   test_output ${exe_name} ${in_name} ${out_name} ${tmp_name} ${diff_name}
 }
@@ -158,7 +166,6 @@ function basic_tests() {
   run_test tests/class_var_lint.cpy
   run_test tests/debug_keyword.cpy
   run_test tests/dangling_hashes.cpy
-  run_test tests/hidden.cpy
 }
 
 function project_tests() {

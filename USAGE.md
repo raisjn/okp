@@ -252,3 +252,10 @@ In okp dialect, `raw_input a,b,c` gets translated into `cin >> a >> b >> c`.
 ### self (okp extension)
 
 `self.` gets translated into `this->` to make the code look more pythonic
+
+### static initialization
+
+if the `-ig` flag is used, it's possible to declare and initializes static
+variables inline at the namespace level, like: `static int foo = 1`. it's also
+possible to declare and initialize variables like `extern int foo = 1` at the
+class level.

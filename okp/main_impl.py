@@ -36,6 +36,8 @@ def get_parser():
         help="enable rof loop shorthand")
     parser.add_argument('-t', '--transpile', dest='transpile', action="store_true",
         help="don't compile code, only transpile")
+    parser.add_argument('-ig', '--include-guard', dest='include_guard',
+        help="specify include guard to use")
     parser.add_argument('-sh', '--single-header', dest='single_header', action="store_true",
         help="transpile into a single header file")
     parser.add_argument('-li', '--lint', dest='lint', action="store_true",
@@ -68,7 +70,14 @@ def main():
     config.KEEP_DIR = args.keep_dir
     config.RUN_EXE = args.runexe
     config.RUN_WITH_INPUT = args.runinput
+    config.ADD_SOURCE_MAP = args.add_source_map
     config.COMPILER_FLAGS = unknown
+
+        
+    if args.include_guard:
+        config.PROJECT_IMPL_DEF = args.include_guard
+        config.EXTRACT_IMPL = True
+
     if args.runinput:
         config.RUN_EXE = True
 

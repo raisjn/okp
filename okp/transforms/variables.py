@@ -308,9 +308,14 @@ def add_auto_declarations(lines):
         if i < len(lines) - 1:
             next_line = lines[i+1]
             next_indent = get_indent(next_line)
-
+    
+        #TODO: if line has special syntax (@func?), we fix its args and remove the @func
         if sline.startswith('for ') or sline.startswith('for('):
             line = handle_for_loop_auto(line, scope)
+
+        if sline.endswith(":"):
+            line = handle_function_decls(line, scope, in_class)
+
         if indent == 0 or indent < next_indent:
             line = handle_function_decls(line, scope, in_class)
         if line.strip().startswith('return'):
@@ -331,7 +336,7 @@ def replace_walrus_operator(lines):
             newlines.append(line)
             continue
 
-        tokens = smart_split(line, [" "])
+        tokens = smart_split(line, " ")
         indent = get_indent(line)
         walrus_toks = [t for t in tokens if ":=" in t and not t.startswith('"')]
         if walrus_toks:

@@ -36,7 +36,13 @@ def find_matching(line, open, close, start):
 # anything inside [], (), {} and <> are kept together
 # anything inside "" or '' is kept together
 # we pass a separator, like ' ' or ',' and we get back the inner pieces
-def smart_split(line, split_chars=[], keep_splitters=False):
+
+def smart_split(line, split_chars, keep_splitters=False):
+    return [x for x in _smart_split(line, split_chars, keep_splitters)]
+
+from functools import lru_cache
+@lru_cache(maxsize=None)
+def _smart_split(line, split_chars, keep_splitters=False):
     split = []
     prev = []
 
