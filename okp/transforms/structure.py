@@ -1,4 +1,5 @@
 from ..util import *
+from .. import config
 
 
 def add_trailing_semicolons(lines):
@@ -131,6 +132,8 @@ def join_backslash_lines(tlines):
     i = 0
     full_line = []
     line_no = None
+
+    join_periods = config.JOIN_ENDING_PERIODS
     while i < len(tlines):
         if not line_no:
             line_no = tlines[i][0]
@@ -140,6 +143,8 @@ def join_backslash_lines(tlines):
         if line.endswith('\\'):
             # strip off the backslash, strip off the remaining spaces
             full_line.append(line.rstrip('\\').rstrip())
+        elif join_periods and line.endswith('.'):
+            full_line.append(line.strip())
         else:
             if full_line:
                 full_line.append(line.strip())

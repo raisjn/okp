@@ -277,6 +277,8 @@ def compile_project(args):
         tmp_dir = tempfile.mkdtemp()
     util.verbose("working tmp dir is", tmp_dir)
 
+    config.JOIN_ENDING_PERIODS = args.join_periods
+
     try:
         process_files(tmp_dir, args)
 

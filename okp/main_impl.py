@@ -42,6 +42,8 @@ def get_parser():
         help="run linters before compiling")
     parser.add_argument('-ns', '--no-source-map', dest='add_source_map', action="store_false",
         help="Add source maps to .cpp files", default=True)
+    parser.add_argument('-ntp', '--no-trailing-periods', dest='join_periods', action="store_false",
+        help="Don't join lines with trailing periods", default=True)
 
     return parser
 
