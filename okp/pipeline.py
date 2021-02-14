@@ -16,6 +16,8 @@ def pipeline(lines, base_dir=None, add_source_map=True, fname=None):
     tlines = structure.join_backslash_lines(tlines)
     tlines = structure.join_open_bracketed_lines(tlines)
     tlines = structure.join_percent_bracketed_lines(tlines)
+    tlines = structure.fix_dangling_hash_lines(tlines)
+
     lines = [line for line_no, line in tlines]
     line_nos = [line_no for line_no, _ in tlines]
     num_lines = len(lines)
