@@ -243,23 +243,20 @@ def join_open_bracketed_lines(tlines):
     return new_tlines
 
 def fix_dangling_hash_lines(tlines):
-    i = 0
     new_lines = []
-    new_no = 0
+    i = 0
     while i < len(tlines) - 1:
-        _, line = tlines[i]
+        no, line = tlines[i]
         _, nline = tlines[i+1]
 
-        new_lines.append((new_no, line))
+        new_lines.append((no, line))
         if hash_line(line):
             if get_indent(line) > get_indent(nline):
-                new_no += 1
-                new_lines.append((new_no, get_indent(line) * ' ' + ';'))
+                new_lines.append((no, get_indent(line) * ' ' + ';'))
 
 
-        new_no += 1
         i += 1
-    new_lines.append((new_no, tlines[-1][1]))
+    new_lines.append(tlines[-1])
     return new_lines
 
 def add_preceding_ignore_chars(lines):
