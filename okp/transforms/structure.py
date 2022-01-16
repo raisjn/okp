@@ -222,7 +222,15 @@ def join_open_bracketed_lines(tlines):
         if not orig_line_no:
             orig_line_no = line_no
         cur_line.append(line)
-        for c in line:
+        i = 0
+        while i < len(line):
+            c = line[i]
+            i += 1
+            if c == "'":
+                _, i = find_matching(line, c, c, i)
+            if c == '"':
+                _, i = find_matching(line, c, c, i)
+
             if c == '(':
                 s.append(')')
             if c == '{':
