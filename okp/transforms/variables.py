@@ -28,10 +28,15 @@ def split_equals(line):
     brackets = 0
     while i < len(line):
         c = line[i]
+        i += 1
         peeked = ''
+        if c == "'" or c == '"':
+            _, n = find_matching(line, c, c, i)
+            prev.extend(line[i-1:n-1])
+            i = n
         if c == '=':
-            if i < len(line)-1:
-                peeked = line[i+1]
+            if i < len(line):
+                peeked = line[i]
 
             if peeked == '=':
                 prev.append(c)
@@ -48,7 +53,6 @@ def split_equals(line):
             elif c == ']':
                 brackets -= 1
             prev.append(c)
-        i += 1
 
     tokens.append(''.join(prev))
 
