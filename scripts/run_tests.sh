@@ -166,6 +166,7 @@ function basic_tests() {
   run_test tests/class_var_lint.cpy
   run_test tests/debug_keyword.cpy
   run_test tests/dangling_hashes.cpy
+  run_test tests/quote_cases.cpy
 }
 
 function project_tests() {
